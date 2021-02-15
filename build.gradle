@@ -64,4 +64,6 @@ ext {
     androidXTestRulesVersion = '1.2.0-beta01'
     espressoVersion = '3.2.0'
 
+    // Added to fix multidex errors due to method count
+    multidexVersion = '2.0.1'
 }
