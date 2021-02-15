@@ -66,4 +66,7 @@ ext {
 
     // Added to fix multidex errors due to method count
     multidexVersion = '2.0.1'
+
+    firebaseAuthVersion = '5.0.0'
+    timberVersion = '4.7.1'
 }
