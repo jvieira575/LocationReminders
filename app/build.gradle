@@ -124,4 +124,7 @@ dependencies {
 
     // Added to fix multidex errors due to method count
     implementation "androidx.multidex:multidex:$multidexVersion"
+
+    // Firebase authentication
+    implementation 'com.firebaseui:firebase-ui-auth:5.0.0'
 }
