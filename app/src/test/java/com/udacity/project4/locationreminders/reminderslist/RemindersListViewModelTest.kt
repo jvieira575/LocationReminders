@@ -43,7 +43,7 @@ class RemindersListViewModelTest{
     }
 
     @Test
-    fun loadRemindersSuccess() = mainCoroutineRule.runBlockingTest {
+    fun check_loading() = mainCoroutineRule.runBlockingTest {
         dataSource.setShouldReturnError(false)
         mainCoroutineRule.pauseDispatcher()
         viewModel.loadReminders()
@@ -61,7 +61,7 @@ class RemindersListViewModelTest{
     }
 
     @Test
-    fun loadRemindersSuccessEmptyList() = mainCoroutineRule.runBlockingTest {
+    fun check_loading_empty_list() = mainCoroutineRule.runBlockingTest {
         dataSource = FakeDataSource(mutableListOf())
         dataSource.setShouldReturnError(false)
         viewModel = RemindersListViewModel(applicationContext, dataSource)
@@ -76,7 +76,7 @@ class RemindersListViewModelTest{
     }
 
     @Test
-    fun loadRemindersError() = mainCoroutineRule.runBlockingTest {
+    fun shouldReturnError() = mainCoroutineRule.runBlockingTest {
         dataSource.setShouldReturnError(true)
         mainCoroutineRule.pauseDispatcher()
         viewModel.loadReminders()
