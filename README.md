@@ -44,7 +44,7 @@ Explain what each test does and why
 1.androidTest
         //TODO: Students explain their testing here.
 2. test
-        //TODO: Students explain their testing here.
+        Tests the RemindersListView and SaveReminderViewModel classes.
 ```
 
 ## Project Instructions
