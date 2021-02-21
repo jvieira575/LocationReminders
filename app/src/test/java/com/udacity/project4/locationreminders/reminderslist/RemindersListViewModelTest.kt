@@ -56,8 +56,8 @@ class RemindersListViewModelTest{
         assertEquals("Null Island", remindersList.first().location)
         assertEquals(0.0, remindersList.first().longitude)
         assertEquals(0.0, remindersList.first().latitude)
-        assertFalse(viewModel.showLoading.value!!)
-        assertFalse(viewModel.showNoData.value!!)
+        assertFalse(viewModel.showLoading.getOrAwaitValue())
+        assertFalse(viewModel.showNoData.getOrAwaitValue())
     }
 
     @Test
@@ -67,12 +67,12 @@ class RemindersListViewModelTest{
         viewModel = RemindersListViewModel(applicationContext, dataSource)
         mainCoroutineRule.pauseDispatcher()
         viewModel.loadReminders()
-        assertTrue(viewModel.showLoading.value!!)
+        assertTrue(viewModel.showLoading.getOrAwaitValue())
         mainCoroutineRule.resumeDispatcher()
         val remindersList = viewModel.remindersList.getOrAwaitValue()
         assertEquals(0, remindersList.size)
-        assertFalse(viewModel.showLoading.value!!)
-        assertTrue(viewModel.showNoData.value!!)
+        assertFalse(viewModel.showLoading.getOrAwaitValue())
+        assertTrue(viewModel.showNoData.getOrAwaitValue())
     }
 
     @Test
@@ -80,10 +80,9 @@ class RemindersListViewModelTest{
         dataSource.setShouldReturnError(true)
         mainCoroutineRule.pauseDispatcher()
         viewModel.loadReminders()
-        assertTrue(viewModel.showLoading.value!!)
+        assertTrue(viewModel.showLoading.getOrAwaitValue())
         mainCoroutineRule.resumeDispatcher()
-        viewModel.showSnackBar.getOrAwaitValue()
-        assertEquals("Fake error encountered...", viewModel.showSnackBar.value)
-        assertTrue(viewModel.showNoData.value!!)
+        assertEquals("Fake error encountered...", viewModel.showSnackBar.getOrAwaitValue())
+        assertTrue(viewModel.showNoData.getOrAwaitValue())
     }
 }
