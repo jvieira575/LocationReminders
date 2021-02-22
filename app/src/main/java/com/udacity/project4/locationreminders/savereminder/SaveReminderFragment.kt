@@ -57,6 +57,22 @@ class SaveReminderFragment : BaseFragment() {
         geofencingClient = LocationServices.getGeofencingClient(activity!!)
 
         binding.saveReminder.setOnClickListener {
+            saveReminderAndAddGeofence()
+        }
+    }
+
+    /**
+     * Saves the reminder to the database and adds a [Geofence].
+     */
+    private fun saveReminderAndAddGeofence() {
+
+        // Check if we have all required data
+        if (_viewModel.reminderTitle.value != null
+            && _viewModel.reminderDescription.value != null
+            && _viewModel.reminderSelectedLocationStr.value != null
+            && _viewModel.latitude.value != null
+            && _viewModel.longitude.value != null) {
+
             val title = _viewModel.reminderTitle.value
             val description = _viewModel.reminderDescription.value
             val location = _viewModel.reminderSelectedLocationStr.value
@@ -78,6 +94,8 @@ class SaveReminderFragment : BaseFragment() {
 
             // Add the Geofence
             addGeofence(geofencingRequest, geofencePendingIntent)
+        } else {
+            _viewModel.showSnackBar.value = "Please enter a title, description, and select a location."
         }
     }
 
