@@ -42,9 +42,9 @@ Explain what each test does and why
 
 ```
 1.androidTest
-        Test the RemindersDao, RemindersLocalRespository, RemindersListFragment, and RemindersActivity.
+        Tests the RemindersDao, RemindersLocalRespository, RemindersListFragment, and RemindersActivity.
 2. test
-        Tests the RemindersListView and SaveReminderViewModel classes.
+        Tests the RemindersListView and SaveReminderViewModel.
 ```
 
 ## Project Instructions
