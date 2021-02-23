@@ -98,7 +98,6 @@ class ReminderListFragmentTest {
         }
 
         onView(withId(R.id.addReminderFAB)).perform(click())
-        Mockito.verify(navController).navigate(ReminderListFragmentDirections.toSaveReminder()
-        )
+        Mockito.verify(navController).navigate(ReminderListFragmentDirections.toSaveReminder())
     }
 }
