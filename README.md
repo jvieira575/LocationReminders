@@ -42,7 +42,7 @@ Explain what each test does and why
 
 ```
 1.androidTest
-        //TODO: Students explain their testing here.
+        Test the RemindersDao, RemindersLocalRespository, RemindersListFragment, and RemindersActivityTest.
 2. test
         Tests the RemindersListView and SaveReminderViewModel classes.
 ```
