@@ -77,17 +77,21 @@ class ReminderListFragment : BaseFragment() {
         when (item.itemId) {
             R.id.logout -> {
                 Timber.i("User clicked Logout. Starting AuthenticationActivity...")
-                AuthUI.getInstance().signOut(requireContext())
-                val intent = Intent(requireContext(), AuthenticationActivity::class.java).apply {
+                AuthUI.getInstance()
+                    .signOut(requireContext())
+                    .addOnCompleteListener {
+                        val intent = Intent(requireContext(), AuthenticationActivity::class.java).apply {
 
-                    // Start new activity in new task
-                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        // Start new activity in new task
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    }
+                    startActivity(intent)
                 }
-                startActivity(intent)
+
+                return true
             }
         }
         return super.onOptionsItemSelected(item)
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

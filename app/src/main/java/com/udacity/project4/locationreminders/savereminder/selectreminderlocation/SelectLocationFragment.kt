@@ -62,7 +62,7 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_select_location, container, false)
+        binding = FragmentSelectLocationBinding.inflate(inflater, container, false)
         binding.viewModel = _viewModel
         binding.lifecycleOwner = this
         binding.saveButton.setOnClickListener { onLocationSelected() }
@@ -324,14 +324,16 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
      */
     private fun onLocationSelected() {
         // Check to ensure the user has selected a location before saving
-        if (selectedMapLocation != null && selectedMapLocationName != null) {
-            _viewModel.longitude.value = selectedMapLocation!!.longitude
-            _viewModel.latitude.value = selectedMapLocation!!.latitude
-            _viewModel.reminderSelectedLocationStr.value = selectedMapLocationName
-            _viewModel.navigationCommand.postValue(NavigationCommand.Back)
-        } else {
-            Timber.e("User has not entered a location. Displaying error message.")
-            _viewModel.showErrorMessage.value = getString(R.string.err_select_location)
+        with(_viewModel) {
+            if (selectedMapLocation != null && selectedMapLocationName != null) {
+                longitude.value = selectedMapLocation!!.longitude
+                latitude.value = selectedMapLocation!!.latitude
+                reminderSelectedLocationStr.value = selectedMapLocationName
+                navigationCommand.postValue(NavigationCommand.Back)
+            } else {
+                Timber.e("User has not entered a location. Displaying error message.")
+                showErrorMessage.value = getString(R.string.err_select_location)
+            }
         }
     }
 
@@ -352,7 +354,7 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
 
             // This app has very little use when permissions are not granted so present a snackbar
             // explaining that the user needs location permissions in order to play.
-            Snackbar.make(requireView(), R.string.permission_denied_explanation, Snackbar.LENGTH_INDEFINITE)
+            Snackbar.make(requireView(), R.string.permission_denied_explanation, Snackbar.LENGTH_LONG)
                 .setAction(R.string.settings) {
                     // Start activity for user to enable location
                     startActivity(Intent().apply {
